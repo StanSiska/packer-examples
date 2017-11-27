@@ -1,0 +1,54 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+
+    "source_ami": "ami-32d8124a",
+    "ami_name": "ami-DockerHost {{timestamp}}",
+    "instance_type": "t2.micro",
+
+    "vpc_id": "vpc-f975a89f",
+    "subnet_id": "subnet-baaf41dc",
+    "security_group_id": "sg-8b2cadf1",
+    "ssh_username": "ec2-user",
+    "encrypt_boot": true,
+
+    "tags": {
+      "Name": "DevOps-AMI-170901-Docker-Host",
+      "OS_Version": "ami-2017-09-01",
+      "Release": "Latest"
+    },
+
+    "launch_block_device_mappings": [
+      {
+        "device_name": "/dev/xvda",
+        "volume_size": 8,
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }
+    ]
+  }],
+
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 5",
+      "sudo su",
+      "sudo yum update -y",
+      "sudo yum install -y httpd docker",
+      "sudo cat << EOF > /tmp/index.html",
+      "<html><body><h1>Welcome to Docker Host AMI 2017-09-01</h1></body></html>",
+      "EOF",
+      "sudo cp /tmp/index.html /var/www/html/index.html",
+      "sudo rm -rf /tmp/index.html",
+      "sudo service httpd start",
+      "sudo chkconfig httpd on"
+    ]
+  }]
+}
