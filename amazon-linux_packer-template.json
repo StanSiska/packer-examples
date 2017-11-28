@@ -35,8 +35,7 @@
                 "sudo ln -s /etc/motd /etc/issue",
                 "sudo yum install -y elinks screen httpd",
                 "sudo service httpd start",
-                "sudo systemctl httpd on",
-                "echo '<html><body>Welcome to the AWS AMI built by Packer</body></html>' >> "
+                "echo '<html><body>Welcome to the AWS AMI built by Packer</body></html>' >> /var/www/html"
             ]
         }
     ]
