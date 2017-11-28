@@ -11,7 +11,7 @@
         "instance_type": "t2.micro",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `aws_ami_name`}}",
-        "ami_description": "Customized Amazon Linux",
+        "ami_description": "Customized AMI Linux",
         "associate_public_ip_address": "true",
         "source_ami_filter": {
             "filters": {
@@ -33,7 +33,10 @@
                 "echo 'No unauthorized access permitted' | sudo tee /etc/motd",
                 "sudo rm /etc/issue",
                 "sudo ln -s /etc/motd /etc/issue",
-                "sudo yum install -y elinks screen"
+                "sudo yum install -y elinks screen httpd",
+                "sudo service httpd start",
+                "sudo systemctl httpd on",
+                "echo '<html><body>Welcome to the AWS AMI built by Packer</body></html>' >> "
             ]
         }
     ]
