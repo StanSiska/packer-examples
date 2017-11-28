@@ -36,18 +36,17 @@
                 "sudo yum remove java-1.7.0-openjdk -y",
                 "sudo yum install java-1.8.0 java-1.8.0-openjdk-devel tomcat8-webapps -y",
                 "sudo chkconfig tomcat8 on"
-            ],
-            "scripts": [
-                "03-AWS-Builder-AMI/scripts/jenkins-install.sh",
-                "03-AWS-Builder-AMI/scripts/jenkins-ssh-key.sh",
-                "03-AWS-Builder-AMI/scripts/jenkins-plugins.sh"
-
             ]
         },
         {
             "type": "file",
             "source" : "03-AWS-Builder-AMI/scripts/",
-            "destination": "/tmp"
+            "destination": "/tmp",
+            "scripts": [
+                    "03-AWS-Builder-AMI/scripts/jenkins-install.sh",
+                    "03-AWS-Builder-AMI/scripts/jenkins-ssh-key.sh",
+                    "03-AWS-Builder-AMI/scripts/jenkins-plugins.sh"
+            ]
         }
     ]
 }
