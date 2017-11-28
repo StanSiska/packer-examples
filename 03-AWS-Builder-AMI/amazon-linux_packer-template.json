@@ -11,15 +11,15 @@
         "instance_type": "t2.micro",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `aws_ami_name`}}",
-        "ami_description": "Customized Amazon Linux",
+        "ami_description": "Customized AMI Linux",
         "associate_public_ip_address": "true",
         "source_ami_filter": {
             "filters": {
                 "virtualization-type": "hvm",
-                "name": "amzn-ami*-ebs",
+                "name": "amzn-ami*-x86_64-ebs",
                 "root-device-type": "ebs"
             },
-            "owners": ["933815432209"],
+            "owners": ["amazon"],
             "most_recent": true
         }
     }],
@@ -30,10 +30,25 @@
             "inline": [
                 "sudo yum update -y",
 				"sudo /usr/sbin/update-motd --disable",
-                "echo 'No unauthorized access permitted' | sudo tee /etc/motd",
+                "echo 'No unauthorized access permitted!' | sudo tee /etc/motd",
                 "sudo rm /etc/issue",
                 "sudo ln -s /etc/motd /etc/issue",
-                "sudo yum install -y elinks screen"
+                "sudo yum remove java-1.7.0-openjdk -y",
+                "sudo yum install java-1.8.0 java-1.8.0-openjdk-devel tomcat8-webapps -y",
+                "sudo chkconfig tomcat8 on"
+            ]
+        },
+        {
+            "type": "file",
+            "source" : "03-AWS-Builder-AMI/scripts/",
+            "destination": "/tmp"
+        },
+        {
+            "type": "shell",
+            "scripts": [
+                    "03-AWS-Builder-AMI/scripts/jenkins-install.sh",
+                    "03-AWS-Builder-AMI/scripts/jenkins-ssh-key.sh",
+                    "03-AWS-Builder-AMI/scripts/jenkins-plugins.sh"
             ]
         }
     ]

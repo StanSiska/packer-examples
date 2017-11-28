@@ -5,15 +5,16 @@ environment_variables:
   plaintext:
     PACKER_NO_COLOR: "1"
     PACKER_LOG: "1"
+    AWS_POLL_DELAY_SECONDS: "10"
 
 phases:
   pre_build:
     commands:
-      - echo "Installing HashiCorp Packer..."
+      - echo ">>> Installing HashiCorp Packer..."
       - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.1.2/packer_1.1.2_linux_amd64.zip && unzip packer.zip
-      - echo "Installing jq..."
+      - echo ">>> Installing jq..."
       - curl -qL -o jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod +x ./jq
-      - echo "Validating amazon-linux_packer-template.json"
+      - echo ">>> Validating amazon-linux_packer-template.json"
       - ./packer validate amazon-linux_packer-template.json
   build:
     commands:
@@ -23,7 +24,6 @@ phases:
       - echo "Configuring AWS credentials"
       - mkdir -p ~/.aws
       - curl -qL -o aws_credentials.json http://169.254.170.2/$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI > aws_credentials.json
-      - cat aws_credentials.json
       - aws configure set region $AWS_REGION
       - aws configure set aws_access_key_id `./jq -r '.AccessKeyId' aws_credentials.json`
       - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
