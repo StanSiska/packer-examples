@@ -41,7 +41,10 @@
         {
             "type": "file",
             "source" : "03-AWS-Builder-AMI/scripts/",
-            "destination": "/tmp",
+            "destination": "/tmp"
+        },
+        {
+            "type": "shell",
             "scripts": [
                     "03-AWS-Builder-AMI/scripts/jenkins-install.sh",
                     "03-AWS-Builder-AMI/scripts/jenkins-ssh-key.sh",
