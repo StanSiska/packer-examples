@@ -16,10 +16,10 @@ do
 done
 echo "Jenkins is up! Downloading plugins" 
 
-
-echo "There is some bug with the plugin installer so we have to follow procedure here https://gist.github.com/rowan-m/1026918"
-curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' | curl -X POST -H 'Accept: application/json' -d @- http://localhost:8080/updateCenter/byId/default/postBack
-sudo java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git Blueocean
+echo "Plugin installation skipped"
+#echo "There is some bug with the plugin installer so we have to follow procedure here https://gist.github.com/rowan-m/1026918"
+#curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' | curl -X POST -H 'Accept: application/json' -d @- http://localhost:8080/updateCenter/byId/default/postBack
+#sudo java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git Blueocean
 #java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin http://updates.jenkins-ci.org/download/plugins/git/2.0.4/git.hpi http://updates.jenkins-ci.org/download/plugins/swarm/1.15/swarm.hpi http://updates.jenkins-ci.org/download/plugins/bitbucket/1.0/bitbucket.hpi
 #cd /var/lib/jenkins/plugins
 #wget http://updates.jenkins-ci.org/download/plugins/git/2.0.4/git.hpi 
