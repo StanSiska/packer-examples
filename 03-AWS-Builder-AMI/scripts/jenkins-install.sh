@@ -12,4 +12,4 @@ sudo yum install jenkins -y
 sudo service jenkins start
 
 echo "Jenkins configured to start after boot"
-sudo chkconfig on jenkins
+sudo chkconfig jenkins on

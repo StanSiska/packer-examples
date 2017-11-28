@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install -y unzip
+sudo yum install -y unzip
 
 wget http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
 sudo mkdir /usr/local/ec2
