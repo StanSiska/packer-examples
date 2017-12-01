@@ -40,15 +40,15 @@
         },
         {
             "type": "file",
-            "source" : "03-AWS-Builder-AMI/scripts/",
+            "source" : "03-AWS-AMI-Builder/scripts/",
             "destination": "/tmp"
         },
         {
             "type": "shell",
             "scripts": [
-                    "03-AWS-Builder-AMI/scripts/jenkins-install.sh",
-                    "03-AWS-Builder-AMI/scripts/jenkins-ssh-key.sh",
-                    "03-AWS-Builder-AMI/scripts/jenkins-plugins.sh"
+                    "03-AWS-AMI-Builder/scripts/jenkins-install.sh",
+                    "03-AWS-AMI-Builder/scripts/jenkins-ssh-key.sh",
+                    "03-AWS-AMI-Builder/scripts/jenkins-plugins.sh"
             ]
         }
     ]
